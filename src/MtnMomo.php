@@ -66,7 +66,6 @@ abstract class MtnMomo extends GuzzleClient
         ];
           
         $response = $this->request('post', $url = $this->requestUrl('token'), $params = [], $headers);
-        // { access_token: "eyJ0eXAi7MRHUfMHikzQNBPAwZ2dVaIVrUgrbhiUb10A", token_type: "access_token", expires_in: 3600 }
 
         if ( ! $response->isSuccess() ) {
             throw new MtnMomoException("Error in getting token: {$url}. Response: " . (string) $response);
@@ -143,11 +142,9 @@ abstract class MtnMomo extends GuzzleClient
 
         }elseif(strlen($defaultCallbackUrlInEnv) > 1){
             $headers['X-Callback-Url'] = $defaultCallbackUrlInEnv; 
-        } 
+        }
 
-        $response = $this->request('post', $this->requestUrl('createTransaction'), $params, $headers);
- 
-        return $response->isSuccess() ? $transactionUuid : $response;
+        return $this->request('post', $this->requestUrl('createTransaction'), $params, $headers);
     }
  
     /**
