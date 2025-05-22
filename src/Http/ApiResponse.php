@@ -79,6 +79,11 @@ class ApiResponse
     {
         return $this->getStatusCode() < 400;
     }
+
+    public function getRequestData()
+    {
+        return $this->requestData;
+    }
  
 
     public function __toString()
